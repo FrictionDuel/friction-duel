@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friction Duel 摩擦メーター ver.2.0</title>
+    <style>
+        body {font-family: Arial, sans-serif; background: black; color: #ff3300; text-align: center; padding: 50px;}
+        h1 {font-size: 2.5em; margin: 20px;}
+        button {font-size: 1.5em; padding: 20px 40px; background: #ff3300; color: black; border: none; border-radius: 15px; cursor: pointer;}
+        #result {font-size: 3em; margin: 50px; font-weight: bold;}
+        .fire {font-size: 4em; animation: blink 1s infinite;}
+        @keyframes blink {0%,100%{opacity:1} 50%{opacity:0.3}}
+    </style>
+</head>
+<body>
+    <div class="fire">🔥🔥🔥</div>
+    <h1>フリクションデュエル 運測定スタート！</h1>
+    <p>今、頭に浮かんだ「○○する／しない」を測れ</p>
+    <button onclick="measure()">5秒で運を測る！</button>
+    <div id="result"></div>
+
+    <script>
+        function measure() {
+            const num = Math.random() * 100;
+            const percent = Math.floor(num);
+            const result = document.getElementById("result");
+            result.innerHTML = `運: ${percent}% 🔥`;
+            if(percent >= 70) result.style.color = "#ff0000";
+            else if(percent >= 50) result.style.color = "#ff8800";
+            else result.style.color = "#ffffff";
+        }
+    </script>
+</body>
+</html>
