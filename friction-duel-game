@@ -1,0 +1,71 @@
+friction-duel-game/
+  index.html
+  style.css
+  game.js
+  cards.json
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>摩擦デュエル</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <h1>摩擦デュエル</h1>
+
+  <div id="player-hand" class="hand">あなたのカード</div>
+  <div id="enemy-hand" class="hand">相手のカード</div>
+
+  <button id="duel-btn">デュエル開始！</button>
+
+  <div id="result"></div>
+
+  <script src="game.js"></script>
+</body>
+</html>
+body {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.hand {
+  border: 2px solid #555;
+  padding: 20px;
+  margin: 20px;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+}
+document.getElementById("duel-btn").addEventListener("click", () => {
+  const player = getRandomCard();
+  const enemy = getRandomCard();
+
+  const result = judge(player.power, enemy.power);
+
+  document.getElementById("player-hand").innerText =
+    `あなたのカード：${player.name}（${player.power}）`;
+  document.getElementById("enemy-hand").innerText =
+    `相手のカード：${enemy.name}（${enemy.power}）`;
+
+  document.getElementById("result").innerText = `結果：${result}`;
+});
+
+function getRandomCard() {
+  const cards = [
+    { name: "摩擦Lv1", power: 10 },
+    { name: "摩擦Lv2", power: 20 },
+    { name: "摩擦Lv3", power: 30 },
+    { name: "摩擦Lv4", power: 40 },
+  ];
+  return cards[Math.floor(Math.random() * cards.length)];
+}
+
+function judge(p, e) {
+  if (p > e) return "勝ち！🔥";
+  if (p < e) return "負け…💦";
+  return "引き分け🥲";
+}
